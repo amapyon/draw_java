@@ -11,7 +11,7 @@ public class TextTest {
 	@Test
 	public void testOneText() throws Exception {
 		Document doc = new Document(210.0, 297.0, "testOneText.bmp");
-		Text t = new Text(50, 40, "X‚É‚Ä", 24);
+		Text t = new Text(50, 40, "æ£®ã«ã¦", 24);
 		doc.addContent(t);
 		doc.draw();
 	}
