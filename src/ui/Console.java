@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Console {
 	private Scanner scanner;
-	private String command;
+	private String command = "";
 	
 	public Console(InputStream in) {
 		scanner = new Scanner(in);

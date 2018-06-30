@@ -12,7 +12,7 @@ public class Command {
 	public Command(String commandLine) {
 		this.commandLine = commandLine.trim();
 	}
-
+	
 	public boolean is(String command) {
 		if (commandLine.equals("")) {
 			return false;
@@ -102,4 +102,5 @@ public class Command {
 	private boolean isGroupFirstCommand() {
 		return nextCommand.equals("");
 	}
+
 }

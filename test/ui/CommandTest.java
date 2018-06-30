@@ -29,7 +29,7 @@ public class CommandTest {
 		c = new Command("  help  ");
 		assertTrue(c.is("help"));
 		
-		c = new Command("text (50, 40, \"森にて\", 34)");
+		c = new Command("text (60, 80, \\2018年6月27日\\n森に行った。(vol1,1)\", 12) ");
 		assertTrue(c.is("text"));
 	}
 
