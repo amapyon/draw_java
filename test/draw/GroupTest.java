@@ -1,7 +1,5 @@
 package draw;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.awt.Color;
 import java.io.IOException;
 
@@ -19,7 +17,7 @@ class GroupTest {
 		Document doc = new Document(210, 297, "GroupTest.bmp");
 		Group group = new Group(100, 100);
 		doc.addContent(group);
-		doc.draw();
+		doc.drawToFile();
 	}
 	
 	@DisplayName("1つの要素を持ったグループ")
@@ -32,7 +30,7 @@ class GroupTest {
 
 		group.addContent(text);
 		doc.addContent(group);
-		doc.draw();
+		doc.drawToFile();
 	}
 
 	@DisplayName("2つの要素を持ったグループ")
@@ -46,10 +44,10 @@ class GroupTest {
 		Text text = new Text(20, 20, "Text in Group.", 11);
 		group.addContent(text);
 		
-		Image image = new Image(20, 50, 100, 50, "https://eiwasec.files.wordpress.com/2018/06/img64_64.png");
+		Image image = new Image(20, 50, 100, 50, "hhttps://eiwasec.files.wordpress.com/2018/07/02_s.jpg");
 		group.addContent(image);
 		
 		doc.addContent(group);
-		doc.draw();
+		doc.drawToFile();
 	}
 }

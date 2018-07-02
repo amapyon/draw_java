@@ -1,10 +1,6 @@
 package draw;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TextTest {
 
@@ -13,7 +9,7 @@ public class TextTest {
 		Document doc = new Document(210.0, 297.0, "testOneText.bmp");
 		Text t = new Text(50, 40, "森にて", 24);
 		doc.addContent(t);
-		doc.draw();
+		doc.drawToFile();
 	}
 
 	@Test
@@ -54,6 +50,6 @@ public class TextTest {
 		doc.addContent(new Text(30, 0, "|", 11));
 		doc.addContent(new Text(40, 0, "|", 11));
 		doc.addContent(new Text(50, 0, "|50", 11));
-		doc.draw();
+		doc.drawToFile();
 	}
 }

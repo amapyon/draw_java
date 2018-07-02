@@ -1,32 +1,35 @@
 package app;
 
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Scanner;
-
-import javax.imageio.ImageIO;
-
+import draw.Document;
+import draw.Content;
 import ui.Command;
+import ui.Console;
+import util.ContentFactory;
 
 public class Main {
 
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		String line;
-		while ((line = scanner.nextLine()) != null) {
-			Command c = new Command(line);
-			if (c.is("quit")) {
+	public static void main(String[] args) throws Exception {
+		Document doc = new Document(210, 297);
+		Console con = new Console(System.in);
+		while (true) {
+			Command cmd = con.readCommand();
+			if (cmd.is("quit")) {
 				break;
-			} else if (c.is("string")) {
-				String options = c.getOptions();
+			} else if (cmd.is("flush")) {
+				String filename = cmd.getOptionString(1);
+				if (!"".equals(filename)) {
+					doc.setFilename(filename);
+					doc.drawToFile();
+				} else {
+					doc.drawToWindow();
+				}
+			} else if (cmd.is("text") || cmd.is("image") || cmd.is("group")) {
+				Content content = ContentFactory.create(cmd);
+				doc.addContent(content);
 			}
 		}
-		scanner.close();
+		con.close();
+		System.exit(0);
 	}
 
 }

@@ -35,14 +35,27 @@ public class Document {
 		this.bgColor = bgColor;
 	}
 	
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	
 	public Content addContent(Content content) {
 		contents.add(content);
 		return content;
 	}
 	
-	public void draw() throws IOException {
+	public void drawToFile() throws IOException {
 		RenderingEngine.initialize(width, height, fgColor, bgColor);
 		contents.forEach((c)->{c.draw();});
 		RenderingEngine.flush(filename);
 	}
+
+	public void drawToWindow() {
+		RenderingEngine.initialize(width, height, fgColor, bgColor);
+		contents.forEach((c)->{c.draw();});
+		RenderingEngine.flushWindow();
+		
+	}
+
+
 }

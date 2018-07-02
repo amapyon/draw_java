@@ -2,7 +2,6 @@ package draw;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -15,12 +14,16 @@ public class Image extends Content {
 	private String url;
 	private BufferedImage image;
 
-	public Image(double x, double y, double width, double height, String url) throws MalformedURLException, IOException {
+	public Image(double x, double y, double width, double height, String url) {
 		super(x, y);
 		this.width = width;
 		this.height = height;
 		this.url = url;
-		this.image = ImageIO.read(new URL(this.url));
+		try {
+			this.image = ImageIO.read(new URL(this.url));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public BufferedImage getImage() {
