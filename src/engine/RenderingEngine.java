@@ -37,7 +37,7 @@ public class RenderingEngine {
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setColor(fgColor);
 //		System.out.printf("%d %d\n", pxWidth, pxHeight);
-		g.setFont(new Font(null, 0, fontSize));
+		g.setFont(new Font(null, 0, 11));
 		drawString(0, 0, LocalDateTime.now().toString());
 	}
 	
