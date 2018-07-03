@@ -1,5 +1,7 @@
 package util;
 
+import java.io.IOException;
+
 import draw.Content;
 import draw.Group;
 import draw.Image;
@@ -18,13 +20,17 @@ public class ContentFactory {
 					cmd.getOptionInt(4)
 					);
 		} else if (cmd.is("image")) {
-			content = new Image(
-					cmd.getOptionInt(1),
-					cmd.getOptionInt(2),
-					cmd.getOptionInt(3),
-					cmd.getOptionInt(4),
-					cmd.getOptionString(5)
-					);
+			try {
+				content = new Image(
+						cmd.getOptionInt(1),
+						cmd.getOptionInt(2),
+						cmd.getOptionInt(3),
+						cmd.getOptionInt(4),
+						cmd.getOptionString(5)
+						);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} else if (cmd.is("group")) {
 			Group group = new Group(
 					cmd.getOptionInt(1),

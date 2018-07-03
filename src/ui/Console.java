@@ -37,6 +37,7 @@ public class Console {
 	}
 	
 	public static void waitEnter() {
+		System.out.println("-- wait Enter Key --");
 		Console con = new Console(System.in);
 		con.readLine();
 	}
