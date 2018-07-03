@@ -27,6 +27,11 @@ public class RenderingEngine {
 	private static Color bgColor = Color.WHITE; 
 	private static int fontSize = 11;
 	
+	/**
+	 * 初期化
+	 * @param width
+	 * @param height
+	 */
 	public static void initialize(double width, double height) {
 		int pxWidth = toPixel(width);
 		int pxHeight = toPixel(height);
@@ -41,16 +46,33 @@ public class RenderingEngine {
 		drawString(0, 0, LocalDateTime.now().toString());
 	}
 	
+	/**
+	 * 初期化
+	 * @param width
+	 * @param height
+	 * @param fgColor
+	 * @param bgColor
+	 */
 	public static void initialize(double width, double height, Color fgColor, Color bgColor) {
 		RenderingEngine.fgColor = fgColor;
 		RenderingEngine.bgColor = bgColor;
 		initialize(width, height);
 	}
 
+	/**
+	 * フォントサイズを指定する
+	 * @param fontSize
+	 */
 	public static void setFontSize(int fontSize) {
 		RenderingEngine.fontSize = fontSize;
 	}
 	
+	/**
+	 * 文字列を描画する
+	 * @param x
+	 * @param y
+	 * @param text
+	 */
 	public static void drawString(double x, double y, String text) {
 		g.setFont(new Font(null, 0, fontSize));
 		FontMetrics fm = g.getFontMetrics();
@@ -60,18 +82,73 @@ public class RenderingEngine {
 		g.drawString(text, pxX, pxY + fm.getAscent());
 	}
 	
+	/**
+	 *現在のフォンで指定した文字列を出力した際の高さを取得する 
+	 * @return
+	 */
+	public static double getStringHeight() {
+		g.setFont(new Font(null, 0, fontSize));
+		FontMetrics fm = g.getFontMetrics();
+		return toMm(fm.getHeight());
+	}
+	
+	/**
+	 * 現在のフォンで指定した文字列を出力した際の幅を取得する
+	 * @param text
+	 * @return
+	 */
+	public static double getStringWidth(String text) {
+		g.setFont(new Font(null, 0, fontSize));
+		FontMetrics fm = g.getFontMetrics();
+		return toMm(fm.stringWidth(text));
+	}
+
+	/**
+	 * 画像を描画する
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param image
+	 */
 	public static void drawImage(double x, double y, double width, double height, BufferedImage image) {
 		g.drawImage(image, toPixel(x), toPixel(y), toPixel(width), toPixel(height), null);
 	}
 	
+	public static void drawLine(double x1, double y1, double x2, double y2) {
+		g.drawLine(toPixel(x1), toPixel(y1), toPixel(x2), toPixel(y2));
+	}
+	
+	/**
+	 * mmの値を、ピクセルに変換する
+	 * @param value mmの値
+	 * @return ピクセル
+	 */
 	private static int toPixel(double value) {
 		return (int)(value * SCALE);
 	}
 	
+	/**
+	 * ピクセルの値を、mmに変換する
+	 * @param value ピクセルの値
+	 * @return mm
+	 */
+	private static double toMm(double value) {
+		return value / SCALE;
+	}
+	
+	/**
+	 * 指定したファイルに画像をbmp形式で出力する
+	 * @param filename
+	 * @throws IOException
+	 */
 	public static void flush(String filename) throws IOException {
 		ImageIO.write(canvas, "BMP", new File(filename));
 	}
 
+	/**
+	 * 画像をウィンドウに出力する
+	 */
 	public static void flushWindow() {
 		@SuppressWarnings("serial")
 		JPanel p = new JPanel() {
@@ -95,7 +172,6 @@ public class RenderingEngine {
 		frame.setSize(canvas.getWidth(), canvas.getHeight());
 		frame.add(p);
 		frame.setVisible(true);
-		
 	}
 
 

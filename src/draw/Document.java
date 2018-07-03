@@ -54,8 +54,6 @@ public class Document {
 		RenderingEngine.initialize(width, height, fgColor, bgColor);
 		contents.forEach((c)->{c.draw();});
 		RenderingEngine.flushWindow();
-		
 	}
-
 
 }
