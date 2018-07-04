@@ -7,6 +7,7 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+import engine.OutOfCanvas;
 import engine.RenderingEngine;
 
 public class Image extends Content {
@@ -41,7 +42,11 @@ public class Image extends Content {
 	
 	@Override
 	public void draw(double offsetX, double offsetY) {
-		RenderingEngine.drawImage(offsetX + getX(), offsetY + getY(), getWidth(), getHeight(), getImage());
+		try {
+			RenderingEngine.drawImage(offsetX + getX(), offsetY + getY(), getWidth(), getHeight(), getImage());
+		} catch (OutOfCanvas e) {
+			e.printStackTrace();
+		}
 	}
 
 }

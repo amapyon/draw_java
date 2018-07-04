@@ -1,11 +1,13 @@
 package engine;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Stroke;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -129,9 +131,21 @@ public class RenderingEngine {
 	 * @param width 幅(単位はmm)
 	 * @param height 高さ(単位はmm)
 	 * @param image
+	 * @throws OutOfCanvas 
 	 */
-	public static void drawImage(double x, double y, double width, double height, BufferedImage image) {
-		g.drawImage(image, toPixel(x), toPixel(y), toPixel(width), toPixel(height), null);
+	public static void drawImage(double x, double y, double width, double height, BufferedImage image) throws OutOfCanvas {
+		int pxX = toPixel(x);
+		int pxY = toPixel(y);
+		int pxW = toPixel(width);
+		int pxH = toPixel(height);
+		
+		if (x < 0 || y < 0) {
+			throw new OutOfCanvas();
+		}
+		if (pxX + pxW > canvasWidth || pxY + pxH > canvasHeight) {
+			throw new OutOfCanvas();
+		}
+		g.drawImage(image, pxX, pxY, pxW, pxH, null);
 	}
 
 	/**
@@ -143,6 +157,7 @@ public class RenderingEngine {
 	 * @param y2 終点のy座標(単位はmm)
 	 */
 	public static void drawLine(double x1, double y1, double x2, double y2) {
+		g.setStroke(new BasicStroke(3f)); // 線の太さ
 		g.drawLine(toPixel(x1), toPixel(y1), toPixel(x2), toPixel(y2));
 	}
 

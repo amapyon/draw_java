@@ -19,7 +19,7 @@ public class ImageTest {
 	
 	@Tag("no-assert")
 	@Test
-	public void testExistHttpsJpg() throws Exception {
+	void testExistHttpsJpg() throws Exception {
 		Document doc = new Document(210, 297);
 		String url = "https://eiwasec.files.wordpress.com/2018/07/02_s.jpg";
 		Image image = new Image(80, 105, 100, 100, url);
@@ -28,17 +28,27 @@ public class ImageTest {
 	}
 	
 	@Test
-	public void testNotExist() throws Exception {
+	void testNotExist() throws Exception {
 		String url = "https://eiwasec.files.wordpress.com/NOT_FOUND.jpg";
 		assertThrows(IOException.class, () -> new Image(80, 105, 100, 100, url));
 	}
 
 	@Tag("no-assert")
 	@Test
-	public void testLocalFile() throws Exception {
+	void testLocalFile() throws Exception {
 		Document doc = new Document(210, 297);
 		String url = "file:./resource/02_m.jpg";
 		Image image = new Image(80, 105, 100, 100, url);
+		doc.addContent(image);
+		doc.drawToWindow();
+	}
+
+	@Tag("no-assert")
+	@Test
+	void testBorderedImage() throws Exception {
+		Document doc = new Document(210, 297);
+		String url = "file:./resource/01_m.jpg";
+		Image image = new BorderedImage(80, 105, 100, 100, url);
 		doc.addContent(image);
 		doc.drawToWindow();
 	}

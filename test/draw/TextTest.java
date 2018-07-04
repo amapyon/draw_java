@@ -1,6 +1,10 @@
 package draw;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
+
+import ui.Console;
 
 public class TextTest {
 
@@ -51,5 +55,21 @@ public class TextTest {
 		doc.addContent(new Text(40, 0, "|", 11));
 		doc.addContent(new Text(50, 0, "|50", 11));
 		doc.drawToFile();
+	}
+	
+	@Test
+	void testBorderdText() throws Exception {
+		Document doc = new Document(210.0, 297.0);
+		doc.addContent(new BorderedText(30, 50, "あいうえお", 11));
+		doc.drawToWindow();
+		Console.waitEnter();
+	}
+
+	@Test
+	void testWrappableText() throws Exception {
+		Document doc = new Document(210.0, 297.0);
+		doc.addContent(new WrappableText(30, 50, "あいうえお\nかきくけこ\nさしすせそ", 18));
+		doc.drawToWindow();
+		Console.waitEnter();
 	}
 }

@@ -12,6 +12,14 @@ public class Text extends Content {
 		this.fontSize = fontSize;
 	}
 	
+	public String getText() {
+		return text;
+	}
+	
+	public int getFontSize() {
+		return fontSize;
+	}
+	
 	@Override
 	public void draw(double offsetX, double offsetY) {
 		RenderingEngine.setFontSize(fontSize);
